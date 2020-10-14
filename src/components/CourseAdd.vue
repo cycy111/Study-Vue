@@ -1,0 +1,29 @@
+<template>
+    <div>
+        <p class="info">
+            <input :value='value' type="text" @input="onInput" @keydown.enter="addCourse"  v-foucus >
+            {{value}}
+            <button @click="addCourse">新增</button>
+        </p>
+    </div>
+</template>
+
+<script>
+    export default {
+        methods:{
+            addCourse(){
+                this.$emit('add-course')
+            },
+            
+            onInput(e){
+                this.$emit('input',e.target.value)
+            }
+        }
+    }
+</script>
+
+<style lang="scss" scoped>
+.info{
+    margin: 0%;
+}
+</style>

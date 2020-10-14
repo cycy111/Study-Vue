@@ -1,24 +1,40 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
+    <img :src="`${publicPath}assets/logo.png`">
+    <CourseAdd v-model="course" @add-course="addCourse"></CourseAdd>
     <CourseList :courses="courses"></CourseList>
   </div>
 </template>
 
 <script>
-import CourseList from '@/components/CourseList.vue'
+import CourseList from '@/components/CourseList.vue';
+import CourseAdd from '@/components/CourseAdd.vue';
 import { getCourses } from "@/api/courses";
 export default {
   name: 'App',
   components: {
-    CourseList
+    CourseList,
+    CourseAdd
   },
   data(){
     return {
         title:'开课吧购物车',
         course:'',
-        courses:[]
-                    
+        courses:[],
+        publicPath: process.env.BASE_URL           
+    }
+  },
+  methods:{
+    addCourse(){
+        if(this.course){
+            this.courses.push({name: this.course})
+            this.course=''
+            this.show=true
+        }
+        else{
+            this.showWarn=true
+        }
+        
     }
   },
   async created(){
@@ -29,7 +45,12 @@ export default {
 }
 </script>
 
-<style>
+<style scoped lang="scss">
+
+a {
+color: $color;
+}
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
