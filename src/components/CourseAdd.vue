@@ -1,7 +1,10 @@
 <template>
     <div>
         <p class="info">
-            <input :value='value' type="text" @input="onInput" @keydown.enter="addCourse"  v-foucus >
+            <!-- <input :value='value' type="text" @input="onInput" @keydown.enter="addCourse"  v-foucus >
+             -->
+            <input :value='value' type="text" @input="onInput" @keydown.enter="addCourse" >
+
             {{value}}
             <button @click="addCourse">新增</button>
         </p>
@@ -10,6 +13,7 @@
 
 <script>
     export default {
+        props:['value'],
         methods:{
             addCourse(){
                 this.$emit('add-course')

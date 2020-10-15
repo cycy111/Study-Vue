@@ -1,23 +1,35 @@
 <template>
   <div id="app">
     <img :src="`${publicPath}assets/logo.png`">
+    <HelloWorld :msg="message"/>
     <CourseAdd v-model="course" @add-course="addCourse"></CourseAdd>
     <CourseList :courses="courses"></CourseList>
   </div>
 </template>
 
 <script>
+import  HelloWorld from "@/components/HelloWorld.vue";
 import CourseList from '@/components/CourseList.vue';
 import CourseAdd from '@/components/CourseAdd.vue';
 import { getCourses } from "@/api/courses";
+//自定义指令
+// Vue.directive('foucus', {
+//     inserted(el){
+//         el.focus()
+//     }
+    
+// });
+
 export default {
   name: 'App',
   components: {
     CourseList,
-    CourseAdd
+    CourseAdd,
+    HelloWorld
   },
   data(){
     return {
+        message:'welcome!',
         title:'开课吧购物车',
         course:'',
         courses:[],
@@ -66,4 +78,10 @@ color: $color;
             fill: currentColor;
             overflow: hidden;
         }
+</style>
+
+<style scoped>
+#app >>> a {
+color: red
+}
 </style>
