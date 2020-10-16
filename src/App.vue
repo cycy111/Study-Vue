@@ -1,17 +1,17 @@
 <template>
   <div id="app">
-    <img :src="`${publicPath}assets/logo.png`">
-    <HelloWorld :msg="message"/>
-    <CourseAdd v-model="course" @add-course="addCourse"></CourseAdd>
-    <CourseList :courses="courses"></CourseList>
+    <nav>
+      <router-link to="/">首页</router-link>
+      <router-link to="/admin">管理</router-link>
+    </nav>
+    <keep-alive>
+    <router-view></router-view>
+    </keep-alive>
   </div>
 </template>
 
 <script>
-import  HelloWorld from "@/components/HelloWorld.vue";
-import CourseList from '@/components/CourseList.vue';
-import CourseAdd from '@/components/CourseAdd.vue';
-import { getCourses } from "@/api/courses";
+
 //自定义指令
 // Vue.directive('foucus', {
 //     inserted(el){
@@ -22,38 +22,7 @@ import { getCourses } from "@/api/courses";
 
 export default {
   name: 'App',
-  components: {
-    CourseList,
-    CourseAdd,
-    HelloWorld
-  },
-  data(){
-    return {
-        message:'welcome!',
-        title:'开课吧购物车',
-        course:'',
-        courses:[],
-        publicPath: process.env.BASE_URL           
-    }
-  },
-  methods:{
-    addCourse(){
-        if(this.course){
-            this.courses.push({name: this.course})
-            this.course=''
-            this.show=true
-        }
-        else{
-            this.showWarn=true
-        }
-        
-    }
-  },
-  async created(){
-    this.courses= await getCourses();
-    //this.batchUpdate();
-    console.log(this.courses)
-  }
+  
 }
 </script>
 
@@ -81,7 +50,7 @@ color: $color;
 </style>
 
 <style scoped>
-#app >>> a {
-color: red
-}
+/* #app >>> a {
+color: blue} */
+
 </style>
